@@ -74,17 +74,17 @@ extern "C" {
 #endif
 
 
-//Test :
-extern __declspec(dllexport) char* Test(char* importPath, char* protoFileName);
+//Invoke :
+extern __declspec(dllexport) char* Invoke(char* importPath, char* protoFileName, char* methodName);
 
-//PrintHello :
-extern __declspec(dllexport) void PrintHello();
+//ListMethods :
+extern __declspec(dllexport) char* ListMethods(char* importPath, char* protoFileName);
+
+//ListServices :
+extern __declspec(dllexport) char* ListServices(char* importPath, char* protoFileName);
 
 //Sum :
 extern __declspec(dllexport) GoInt Sum(GoInt a, GoInt b);
-
-//stringtest :
-extern __declspec(dllexport) void stringtest(char* name);
 
 #ifdef __cplusplus
 }

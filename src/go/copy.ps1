@@ -1,2 +1,2 @@
-Copy-Item "main.dll" -Destination "..\Spacetime.gRPC.CommandLine\Costura32\main.dll"
-Copy-Item "main.dll" -Destination "..\Spacetime.gRPC.CommandLine\Costura64\main.dll"
+Copy-Item "main.dll" -Destination "..\Spacetime.gRPC.Wrapper\Costura32\main.dll"
+Copy-Item "main.dll" -Destination "..\Spacetime.gRPC.Wrapper\Costura64\main.dll"
