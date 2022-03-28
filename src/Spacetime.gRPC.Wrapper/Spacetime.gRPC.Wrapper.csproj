@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Spacetime.GRPCurl.Wrapper</PackageId>
+    <Authors>codymullins</Authors>
+    <Description>C# Wrapper for GRPCurl</Description>
+    <Copyright>GNU General Public License v3.0</Copyright>
+    <PackageProjectUrl>https://github.com/spacetimedotnet/grpc-wrapper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/spacetimedotnet/grpc-wrapper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>c#, grpc, grpcurl</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
