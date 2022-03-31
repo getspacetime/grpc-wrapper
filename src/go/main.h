@@ -78,13 +78,10 @@ extern "C" {
 extern __declspec(dllexport) char* Invoke(char* importPath, char* protoFileName, char* methodName);
 
 //ListMethods :
-extern __declspec(dllexport) char* ListMethods(char* importPath, char* protoFileName);
+extern __declspec(dllexport) char* ListMethods(char* importPath, char* protoFileName, char* svc);
 
 //ListServices :
 extern __declspec(dllexport) char* ListServices(char* importPath, char* protoFileName);
-
-//Sum :
-extern __declspec(dllexport) GoInt Sum(GoInt a, GoInt b);
 
 #ifdef __cplusplus
 }

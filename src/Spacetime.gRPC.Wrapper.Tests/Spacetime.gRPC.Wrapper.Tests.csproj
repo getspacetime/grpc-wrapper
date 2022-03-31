@@ -25,4 +25,13 @@
     <ProjectReference Include="..\Spacetime.gRPC.Wrapper\Spacetime.gRPC.Wrapper.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="protos\greet.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="protos\multipleMethods.proto">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

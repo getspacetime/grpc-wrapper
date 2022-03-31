@@ -5,12 +5,17 @@ package main
 */
 import "C"
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/fullstorydev/grpcurl"
 )
 
 func main() {
+}
+
+type service struct {
+	name string
 }
 
 //Invoke :
@@ -24,9 +29,10 @@ func Invoke(importPath *C.char, protoFileName *C.char, methodName *C.char) *C.ch
 
 //ListMethods :
 //export ListMethods
-func ListMethods(importPath *C.char, protoFileName *C.char) *C.char {
+func ListMethods(importPath *C.char, protoFileName *C.char, svc *C.char) *C.char {
 	paths := make([]string, 2)
 	paths[0] = C.GoString(importPath)
+	service := C.GoString(svc)
 
 	//file := "greet.proto"
 	file := C.GoString(protoFileName)
@@ -35,35 +41,10 @@ func ListMethods(importPath *C.char, protoFileName *C.char) *C.char {
 		return C.CString("err generating descriptor sources: " + err.Error())
 	}
 
-	svcs, err := grpcurl.ListServices(src)
-	if err != nil {
-		return C.CString("err listing services: " + err.Error())
-	}
+	methods, err := grpcurl.ListMethods(src, service)
 
-	if err != nil {
-		return C.CString("err listing methods: " + err.Error())
-	}
-
-	if len(svcs) > 0 {
-		svc := svcs[0]
-
-		res := "found services: " + svc
-
-		methods, err := grpcurl.ListMethods(src, svc)
-
-		if err == nil && len(methods) > 0 {
-			res = res + "found methods: " + methods[0]
-		}
-
-		if err != nil {
-			res = res + "error getting methods: " + err.Error()
-		}
-
-		return C.CString(res)
-	}
-
-	str := C.CString("end of method")
-	return str
+	// todo: handle err properly
+	return toJson(methods)
 }
 
 //ListServices :
@@ -78,21 +59,21 @@ func ListServices(importPath *C.char, protoFileName *C.char) *C.char {
 		return C.CString("err generating descriptor sources: " + err.Error())
 	}
 
+	// todo: handle err properly
 	svcs, err := grpcurl.ListServices(src)
-	if len(svcs) > 0 {
-		svc := svcs[0]
 
-		res := "found services: " + svc
-
-		return C.CString(res)
-	}
-
-	str := C.CString("end of method")
-	return str
+	return toJson(svcs)
 }
 
-//Sum :
-//export Sum
-func Sum(a, b int) int {
-	return a + b
+func toJson(array []string) *C.char {
+	if len(array) > 0 {
+		bytes, err := json.Marshal(array)
+		if err == nil {
+			return C.CString(string(bytes))
+		}
+
+		return C.CString(err.Error())
+	}
+
+	return C.CString("")
 }
